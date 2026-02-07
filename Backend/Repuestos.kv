@@ -1,0 +1,27 @@
+<Ventasclass>:
+    orientation: "vertical"
+    padding: 10
+    spacing: 10
+
+    TextInput:
+        id: nombre
+        hint_text: "Nombre del producto"
+        multiline: False
+
+    TextInput:
+        id: cantidad
+        hint_text: "Cantidad a vender"
+        multiline: False
+        input_filter: "int"
+
+    TextInput:
+        id: mano_obra
+        hint_text: "Mano de obra"
+        multiline: False
+        input_filter: "float"
+
+    Label:
+        id: resultado
+        text: ""
+
+    

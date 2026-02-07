@@ -1,0 +1,24 @@
+
+<Add>:
+    orientation: 'vertical'
+    id: dd
+    TextInput:
+        id: nombre
+        hint_text: "Nombre del producto"
+        multiline: False
+
+    TextInput:
+        id: precio
+        hint_text: "precio"
+        multiline: False
+        input_filter: "float"
+
+    TextInput:
+        id: cantidad
+        hint_text: "cantidad a agregar"
+        multiline: False
+        input_filter: "int"
+
+    Button:
+        text: 'Agregar'
+        on_press: root.agregar_repuestos()

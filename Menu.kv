@@ -1,0 +1,75 @@
+<Myscreenmanager>:
+    MenuScreen:
+        name: "menu"
+    VentaScreen:
+        name: "vender"
+    AgregarScreen:
+        name: "agregar"
+    Screenview:
+        name: "inventario"
+
+<MenuScreen>:
+    BoxLayout:
+        orientation:'vertical'
+        spacing: 20
+        padding: 50
+
+        Button:
+            text: 'agregar productos'
+            on_release:
+                app.root.current = "agregar"
+
+        Button: 
+            text: 'vender Producto'
+            on_release:
+                app.root.current = "vender"
+        Button:
+            text: 'inventario'
+            on_press: app.root.current = "inventario"
+        
+        Button:
+            text: 'Salir'
+            on_press: root.back()
+
+<VentaScreen>:
+    BoxLayout: 
+        orientation: 'vertical'
+        Ventasclass:
+            id: venta 
+            
+            Button:
+                text: "Realizar venrta"
+                on_press: venta.realizar_venta()
+        Button:
+            text: 'volver al inicio'
+            on_release:
+                app.root.current = "menu"
+
+<AgregarScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Add:
+            id: agregar
+
+
+        Button:
+            text: 'volver al inicio'
+            on_release:
+                app.root.current = "menu"
+
+<Screenview>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 20
+        padding: 50
+
+        View:
+            id: _inventario_
+
+    
+            
+    Button:
+        text: 'Home'
+        on_release:
+            app.root.current = "menu"
+        size_hint: 0.1 , 0.1

@@ -1,0 +1,65 @@
+<View>: 
+    BoxLayout:
+        orientation:'vertical'
+        spacing: 15
+        padding: 20
+
+        
+
+    ScrollView:
+        size_hint: 1.8 , 1.1
+
+        GridLayout:
+            id: _inventario_
+            cols: 4
+            size_hint_y: None
+            row_default_height: "50dp"
+            row_force_default: True
+            height: self.minimum_height
+            spacing: 20
+            padding: 20
+
+    BoxLayout: 
+        size_hint_y: None
+        height: '60dp'
+        spacing: '20'
+        padding: [100, 0 , 100 , 0]
+
+        Button:
+            text: 'ver'
+            size_hint: None , None
+            size: '100dp' , '25dp'
+            on_press: root.ver_repuestos()
+
+        Button:
+            text: 'eliminar'
+            on_press: root.delete_items()
+            size_hint: None , None
+            size: '100dp' , '25dp'
+            background_normal: ''
+            background_color: 1,0,0,1
+
+        Button:
+            text: 'Buscar'
+            on_press: root.buscador()
+            size_hint: None , None
+            size: '100dp' , '25dp'
+    
+    FloatLayout:
+        TextInput:
+            id: nombre
+            hint_text: 'Buscar'
+            multiline: False
+            padding: 15
+            spacing: 20
+            size_hint: None , None
+            size: '200dp','50dp'
+            pos_hint: {"x": 0.0, "y": 0.9}
+        
+                
+
+
+        
+
+
+        
