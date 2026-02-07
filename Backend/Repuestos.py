@@ -114,17 +114,17 @@ class View(BoxLayout):
    def agregar_cantidad(self):
      agregador = self.ids._inventario
      agregador.clear_widgets()
-     self.seleccionador
-     agregar = int(input("cantidad a agregar:"))
 
-      repuaa = self.sess.query(Productos).filter_by(Nombre=Busca_repuesto).first()
+     select = self.seleccionador
+     agregar = self.ids.cantidad.text.strip()
 
-      if not repuaa:
-        print("NO encontrado")
-        return
-   
-     repuaa.cantidad += agregar
-     sess.commit()
+     if not select:
+        agregador.add_widget(Label(text="No hay un producto seleccionado aun"))
+     elif select is True:
+        agregador.add_widget(Label(text="Ya hay un producto seleccionado"))
+     
+     select.cantidad += agregar
+     self.sess.commit()
 
      agregador.add_widget(Label(text="se han agregado "))
 
