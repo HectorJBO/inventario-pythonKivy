@@ -7,12 +7,19 @@
         name: "agregar"
     Screenview:
         name: "inventario"
+    Screenservice:
+        name: "servicios"
 
 <MenuScreen>:
     BoxLayout:
         orientation:'vertical'
         spacing: 20
         padding: 50
+
+        Button:
+            text: 'Servicios Disponibles'
+            on_release:
+                app.root.current = "Servicios"
 
         Button:
             text: 'agregar productos'
@@ -73,3 +80,12 @@
         on_release:
             app.root.current = "menu"
         size_hint: 0.1 , 0.1
+
+<Screenservice>
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button
+            text: 'Home'
+            on_release:
+                app.root.current = 'menu'

@@ -21,5 +21,8 @@ class AgregarScreen(Screen):
 class Screenview(Screen):
     pass
 
+class Screenservice(Screen):
+    pass
+
 class Myscreenmanager(ScreenManager):
     pass

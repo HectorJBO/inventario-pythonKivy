@@ -1,3 +1,28 @@
+<FilaProducto>:
+    canvas.before:
+        Color:
+            rgba: (0.3, 0.6, 1, 0.3) if self.selected else (0,0,0,0)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    RecycleView:
+        id: rv
+        viewclass:
+            
+            
+            
+            
+            "FilaProducto"
+
+    RecycleBoxLayout:
+        default_size: None, dp(40)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: "vertical"
+        
+#Estilo Visual del inventario en Kv aun quedan muchos detalles que mejorar
 <View>: 
     BoxLayout:
         orientation:'vertical'
@@ -44,6 +69,12 @@
             on_press: root.buscador()
             size_hint: None , None
             size: '100dp' , '25dp'
+
+        Button:
+            text: 'agregar'
+            on_press: root.agregar_cantidad()
+            size_hint: None , None
+            size: '100dp' , '25dp'
     
     FloatLayout:
         TextInput:
@@ -55,6 +86,18 @@
             size_hint: None , None
             size: '200dp','50dp'
             pos_hint: {"x": 0.0, "y": 0.9}
+
+    FloatLayout:
+        TextInput:
+            id: cantidad
+            hint_text: "Agregar Cantidad"
+            multiline: False
+            input_filter: "int"
+            size_hint: None,None
+            size: "200dp","50dp"
+            pos_hint: {"x": 0.0, "y": 0.9}
+
+        
         
                 
 
