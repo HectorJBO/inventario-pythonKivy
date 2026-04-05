@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, MetaData, create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-db = create_engine('sqlite:///ivan.db')
+db = create_engine('sqlite:///database/ivan.db')
 metadata = MetaData()
 bs = declarative_base()
 

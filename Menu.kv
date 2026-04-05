@@ -84,8 +84,11 @@
 <Screenservice>
     BoxLayout:
         orientation: 'vertical'
+        padding: 20
+        spacing: '15dp'
+        id: servis
 
-        Button
+        Button:
             text: 'Home'
             on_release:
                 app.root.current = 'menu'

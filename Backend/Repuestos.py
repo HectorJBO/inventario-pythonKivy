@@ -1,4 +1,4 @@
-from Models import Productos , sess
+from models.Models import Productos , sess
 from Facturacion import Factura, ReciboBasico , Recibo, Creator_Factura
 from kivy.app import App
 from kivy.uix.label import Label
@@ -34,23 +34,19 @@ class Add(BoxLayout):
     sess.commit()
 
 class inventario_list(BoxLayout):
-   """Fila de inventario con nombre y checkbox"""
-   def __init__(self, name, on_select, **kwargs):
+   def __init__(self, Nombre, on_select, **kwargs):
         super().__init__(orientation='horizontal', size_hint_y=None, height=40, **kwargs)
-        self.name = name
+        self.Nombre = Nombre
         self.on_select = on_select
 
-        # Etiqueta con el nombre del producto
-        self.add_widget(Label(text=str(name), size_hint_x=0.8))
+        self.add_widget(Label(text=str(Nombre), size_hint_x=0.8))
 
-        # Checkbox para seleccionar
         checkbox = CheckBox(size_hint_x=0.2)
         checkbox.bind(active=self.checkbox_changed)
         self.add_widget(checkbox)
 
    def checkbox_changed(self, checkbox, value):
-        """Llama a la función de selección cuando cambia el estado"""
-        self.on_select(self.name, value)
+        self.on_select(self.Nombre, value)
 
 class View(BoxLayout):
    def __init__(self, **kwargs):
@@ -60,70 +56,43 @@ class View(BoxLayout):
    def ver_repuestos(self):
     contenedor = self.ids._inventario_
     contenedor.clear_widgets()
+    self.selected_items = set()
 
-    root = BoxLayout(orientation='vertical', padding=10, spacing=10)
-
-        # Scroll con lista de productos
     scroll = ScrollView(size_hint=(1, 0.8))
-
     product_list = GridLayout(cols=1, spacing=5, size_hint_y=None)
     product_list.bind(minimum_height=product_list.setter('height'))
     
-    self.selected_item = set()
     Repuestos = self.sess.query(Productos).all()
 
-    
-
-    for titulo in [ "id","Nombre", "precio", "cantidad" ]:
+    for titulo in [ "Id","Nombre", "Precio", "Cantidad" ]:
        contenedor.add_widget(Label(text=titulo))
 
     if not Repuestos:
         contenedor.add_widget(
-        Label(text="No hay Repuestos agregados aun..."))
-    else:
-        for Producto in Repuestos:
+        contenedor.add_widget(Label(text="No hay Repuestos agregados aun...")))
+    else: 
+       for Producto in Repuestos:
          contenedor.add_widget(Label(text=str(Producto.id)))
          contenedor.add_widget(Label(text=str(Producto.Nombre)))
          contenedor.add_widget(Label(text=str(Producto.precio)))
          contenedor.add_widget(Label(text=str(Producto.cantidad)))
-
-    for Repuesto in Repuestos:
-       item = inventario_list(Repuesto, self.togglet_item)
+   
+    for Producto in Repuestos:
+       item = inventario_list(Producto, self.togglet_item)
        product_list.add_widget(item)
 
 
     scroll.add_widget(product_list)
-    root.add_widget(scroll)
-      # Botón para mostrar seleccionados
-    btn_show = Button(text="Mostrar seleccionados", size_hint=(1, 0.2))
-    btn_show.bind(on_press=self.show_selected)
-    root.add_widget(btn_show)
+    
    
-   def togglet_item(self, name , is_selected):
+   def togglet_item(self, Nombre , is_selected):
       if is_selected:
-         self.selected_item.add(name)
+         self.selected_items.add(Nombre)
       else: 
-         self.selected_item.discard(name)
-      
-   def show_selected(self, instance):
-        """Muestra en consola los productos seleccionados"""
-        print("Seleccionados:", list(self.selected_items))
-       
-   """def seleccecionador_productos(self , Producto):
-      self.seleccionador = Producto
-
-      if self.seleccionador == True:
-         self.ids._inventario.add_widget(
-            Label(text="Ya hay un repuesto seleccionado")
-         )
-      elif self.seleccionador == False:
-         self.ids._inventario.add_widget(
-            Label(text="No hay Repuesto seleccionado")
-         ) 
-         return"""
+         self.selected_items.discard(Nombre)
       
    def delete_items(self,):
-      if not self.seleccecionador_productos(Producto=Productos):
+      if not self.selected_items(Producto=Productos):
          self.ids._inventario_.add_widget(
             Label(text="No hay producto seleccionado")
          )
@@ -131,7 +100,7 @@ class View(BoxLayout):
       
       nombre = self.seleccionador.Nombre
 
-      self.sess.delete(self.seleccionador)
+      self.sess.delete(self.selected_items)
       self.sess.commit() 
 
       self.ids._inventario_.clear_widgets()
@@ -165,7 +134,7 @@ class View(BoxLayout):
      agregador = self.ids._inventario_
      agregador.clear_widgets()
 
-     select = self.lookfor.cantidad
+     select = self.selected_items.cantidad
      agregar = self.ids.cantidad.text.strip()
 
      if not agregar:

@@ -7,6 +7,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 Builder.load_file("Backend/Repuestos.kv")
 Builder.load_file("Backend/Add.kv")
 Builder.load_file("Backend/View.kv")
+Builder.load_file("services/service.kv")
 
 class MenuScreen(Screen):
     def back(self):
