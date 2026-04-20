@@ -1,7 +1,23 @@
-<Service>:
+
+<Servicios>:
     orientation: 'vertical'
-    id: servis
-    BoxLayout:
-        padding: 15
+    GridLayout:
+        id: _serv_
+        #orientation: 'vertical'
         spacing: 20
+        padding: 20
+        cols: 2 
+
+    TextInput:
+        id: 'Precio'
+        text: ''
+        hint_text: 'precio de servicio'
+        input_filter: "float"
+        size: '200dp', '40dp'
+        size_hint: None,None
+        pos_hint: {"x": 0.7, "y": 0.9}
+
         
+
+
+            

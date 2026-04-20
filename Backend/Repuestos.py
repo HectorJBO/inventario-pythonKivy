@@ -83,6 +83,7 @@ class View(BoxLayout):
 
 
     scroll.add_widget(product_list)
+    contenedor.add_widget(scroll)
     
    
    def togglet_item(self, Nombre , is_selected):
@@ -97,6 +98,9 @@ class View(BoxLayout):
             Label(text="No hay producto seleccionado")
          )
          return
+      else: self.ids._inventario_.add_widget(
+            Label(text="No hay producto seleccionado")
+         )
       
       nombre = self.seleccionador.Nombre
 

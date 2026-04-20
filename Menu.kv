@@ -19,7 +19,7 @@
         Button:
             text: 'Servicios Disponibles'
             on_release:
-                app.root.current = "Servicios"
+                app.root.current = "servicios"
 
         Button:
             text: 'agregar productos'
@@ -48,7 +48,15 @@
                 text: "Realizar venrta"
                 on_press: venta.realizar_venta()
         Button:
-            text: 'volver al inicio'
+            text: ''
+            size_hint: None, None
+            size: '100dp', '100dp'
+            background_normal: "Frontend/image/home.png"
+            canvas.before:
+                RoundedRectangle:
+                    pos: self.pos                         
+                    size: self.size
+                    radius: [150]
             on_release:
                 app.root.current = "menu"
 
@@ -60,7 +68,15 @@
 
 
         Button:
-            text: 'volver al inicio'
+            text: ''
+            size_hint: None, None
+            size: '100dp', '100dp'
+            background_normal: "Frontend/image/home.png"
+            canvas.before:
+                RoundedRectangle:
+                    pos: self.pos                         
+                    size: self.size
+                    radius: [150]
             on_release:
                 app.root.current = "menu"
 
@@ -75,20 +91,50 @@
 
     
             
-    Button:
-        text: 'Home'
-        on_release:
-            app.root.current = "menu"
-        size_hint: 0.1 , 0.1
+        Button:
+            text: ''
+            size_hint: None, None
+            size: '100dp', '100dp'
+            background_normal: "Frontend/image/home.png"
+            canvas.before:
+                RoundedRectangle:
+                    pos: self.pos                         
+                    size: self.size
+                    radius: [150]
+            on_release:
+                app.root.current = "menu"
 
-<Screenservice>
+<Screenservice>:
+    on_pre_enter: _serv_.servis_list()
     BoxLayout:
         orientation: 'vertical'
-        padding: 20
-        spacing: '15dp'
-        id: servis
+        spacing: '10dp'
+        padding: '10dp'
+
+        Servicios:
+            id: _serv_
 
         Button:
-            text: 'Home'
+            text: 'Aplicar'
+            size_hint: None,None
+            size: '100dp','50dp'
+            background_normal: ''
+            background_color: 0,128,0
+            pos_hint: {"x":0.9,"y":0.0}
+            on_press: _serv_.show_selected()
+
+        Button:
+            text: ''
+            size_hint: None, None
+            size: '100dp', '100dp'
+            background_normal: "Frontend/image/home.png"
+            canvas.before:
+                RoundedRectangle:
+                    pos: self.pos                         
+                    size: self.size
+                    radius: [150]
             on_release:
-                app.root.current = 'menu'
+                app.root.current = "menu"
+
+
+
